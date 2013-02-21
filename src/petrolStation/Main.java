@@ -9,17 +9,19 @@ public class Main {
 		
 		HeadQuarter hq = new HeadQuarter();
 		
-		PetrolStation gouda = new PetrolStation("Tankstation Gouda", 1.7f);
-		PetrolStation barendrecht = new PetrolStation("Tankstation Barendrecht", 1.6f);
-		PetrolStation rotterdam = new PetrolStation("Tankstation Rotterdam", 1.5f);
+		PetrolStation barendrecht = new PetrolStation(hq, "Tankstation Barendrecht", 1.6f);
+		PetrolStation rotterdam = new PetrolStation(hq, "Tankstation Rotterdam", 1.5f);
+
+		/* 1. Gouda wordt toegevoegd aan het hoofdkantoor */
+		PetrolStation gouda = new PetrolStation(hq, "Tankstation Gouda", 1.7f);
 		
-		hq.registerPetrolStation(gouda);
-		hq.registerPetrolStation(barendrecht);
-		hq.registerPetrolStation(rotterdam);
-		
+		/* 2. Het hoofdkantoor zet de basisbrandstofprijs.*/
 		hq.setBasePrice(1.10f);
 		
-		hq.unregisterPetrolStation(barendrecht);
+		/* 3. Het tankstation wordt overgenomen en verdwijnt uit de Collection */
+		barendrecht.unregister(hq);
+		
+		/* 4. De basisprijs wordt weer veranderd. */
 		hq.setBasePrice(1.15f);
 	}
 

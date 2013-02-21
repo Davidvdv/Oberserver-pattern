@@ -16,7 +16,9 @@ public class HeadQuarter implements IHeadQuarter {
 	}
 
 	public void unregisterPetrolStation(IPetrolStation petrolStation) {
-		petrolStations.remove(petrolStation);
+		if(petrolStations.contains(petrolStation)) {
+			petrolStations.remove(petrolStation);
+		}
 	}
 
 	public void notifyAllPetrolStations() {
