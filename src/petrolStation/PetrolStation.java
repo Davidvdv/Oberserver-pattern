@@ -14,6 +14,10 @@ public class PetrolStation implements IPetrolStation {
 		hq.registerPetrolStation(this);		
 	}
 	
+	public void register(IHeadQuarter hq) {
+		hq.registerPetrolStation(this);
+	}
+	
 	public void unregister(IHeadQuarter hq) {
 		hq.unregisterPetrolStation(this);
 	}

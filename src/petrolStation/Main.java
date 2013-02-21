@@ -18,7 +18,9 @@ public class Main {
 		/* 2. Het hoofdkantoor zet de basisbrandstofprijs.*/
 		hq.setBasePrice(1.10f);
 		
-		/* 3. Het tankstation wordt overgenomen en verdwijnt uit de Collection */
+		System.out.println("===== Het tankstation Barendrecht verdwijnt uit de Collection en er wordt een nieuwe prijs gezet door het hoofdkantoor. =====");
+		
+		/* 3. Het tankstation Barendrecht verdwijnt uit de Collection */
 		barendrecht.unregister(hq);
 		
 		/* 4. De basisprijs wordt weer veranderd. */
