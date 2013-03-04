@@ -12,7 +12,7 @@ public class Parent implements IParent {
 		this.agenda = agenda;
 		t.subscribeParent(this);		
 		
-		System.out.println("Nieuw ouder: " +this.name);
+		System.out.println("--- Nieuw ouder: " +this.name);
 
 	}
 	
@@ -28,7 +28,7 @@ public class Parent implements IParent {
 		
 		this.startTime = t;
 		
-		System.out.println("	"+this.name+" noteert "+ this.startTime + " in "+ this.agenda);
+		System.out.println("--- "+this.name+" noteert "+ this.startTime + " in "+ this.agenda);
 		
 	}
 	

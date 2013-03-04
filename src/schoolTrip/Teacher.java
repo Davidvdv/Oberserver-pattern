@@ -12,10 +12,10 @@ public class Teacher implements ITeacher {
 	private ArrayList<IParent> parents;
 
 	@SuppressWarnings("unused")
-	public Teacher(IHeadMaster hm, String name, int group) {
+	public Teacher(IHeadMaster hm, String n, int g) {
 		
-		this.name = name;
-		this.group = group;
+		this.name = n;
+		this.group = g;
 		hm.subscribeTeacher(this);		
 		
 		System.out.println("Nieuw leraar: " +this.name);
@@ -23,8 +23,8 @@ public class Teacher implements ITeacher {
 		parents = new ArrayList<IParent>();
 		
 		Parent ouderA = new Parent(this, "Ouder A", "agenda");
-		Parent ouderB = new Parent(this, "Ouder B", "iphone");
-		Parent ouderC = new Parent(this, "Ouder C", "planbord");
+		Parent ouderB = new Parent(this, "Ouder B", "smartphone");
+		Parent ouderC = new Parent(this, "Ouder C", "kalender");
 		
 	}
 	
@@ -42,13 +42,9 @@ public class Teacher implements ITeacher {
 				
 		System.out.println(this.name+" gaat vertrekken om "+ this.startTime);
 		
-		notifyAllParents();
+		notifyParents();
 		
 	}
-	
-	
-	
-		
 	
 	// Teacher -> Parent
 	public void subscribeParent(IParent p) {
@@ -63,15 +59,10 @@ public class Teacher implements ITeacher {
 	}
 
 	// Teacher -> Parent
-	public void notifyAllParents() {
+	public void notifyParents() {
 		for(IParent parent : parents) {
 			parent.updateTime(this.startTime);
 		}
 	}	
-	
-	
-	
-	
-	
 	
 }
