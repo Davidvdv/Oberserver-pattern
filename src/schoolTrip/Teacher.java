@@ -2,38 +2,38 @@ package schoolTrip;
 
 import java.util.ArrayList;
 
-public class Teacher implements ITeacher {
+public class Teacher implements ISubject, IObserver {
 	
 	private int startTime;
 	private int group;
 	private String name;
 	
 	// Teacher -> Parents
-	private ArrayList<IParent> parents;
+	private ArrayList<IObserver> parents;
 
 	@SuppressWarnings("unused")
-	public Teacher(IHeadMaster hm, String n, int g) {
-		
+	public Teacher(ISubject hm, String n, int g) {
+
 		this.name = n;
 		this.group = g;
-		hm.subscribeTeacher(this);		
+		hm.subscribeObserver(this);		
 		
 		System.out.println("Nieuw leraar: " +this.name);
 		
-		parents = new ArrayList<IParent>();
+		this.parents = new ArrayList<IObserver>();
 		
-		Parent ouderA = new Parent(this, "Ouder A", "agenda");
-		Parent ouderB = new Parent(this, "Ouder B", "smartphone");
-		Parent ouderC = new Parent(this, "Ouder C", "kalender");
+		Parent ouderA = new Parent(this, "Ouder A", Parent.Agenda.Planboard);
+		Parent ouderB = new Parent(this, "Ouder B", Parent.Agenda.Agendaboekje);
+		Parent ouderC = new Parent(this, "Ouder C", Parent.Agenda.Smartphone);
 		
 	}
 	
-	public void register(IHeadMaster hm) {
-		hm.subscribeTeacher(this);
+	public void register(ISubject hm) {
+		hm.subscribeObserver(this);
 	}
 	
-	public void unregister(IHeadMaster hm) {
-		hm.unsubscribeTeacher(this);
+	public void unregister(ISubject hm) {
+		hm.unsubscribeObserver(this);
 	}
 
 	public void updateTime(int t) {
@@ -42,25 +42,25 @@ public class Teacher implements ITeacher {
 				
 		System.out.println(this.name+" gaat vertrekken om "+ this.startTime);
 		
-		notifyParents();
+		notifyObservers();
 		
 	}
 	
 	// Teacher -> Parent
-	public void subscribeParent(IParent p) {
+	public void subscribeObserver(IObserver p) {
 		parents.add(p);
 	}
 
 	// Teacher -> Parent
-	public void unsubscribeParent(IParent p) {
+	public void unsubscribeObserver(IObserver p) {
 		if(parents.contains(p)) {
 			parents.remove(p);
 		}
 	}
 
 	// Teacher -> Parent
-	public void notifyParents() {
-		for(IParent parent : parents) {
+	public void notifyObservers() {
+		for(IObserver parent : parents) {
 			parent.updateTime(this.startTime);
 		}
 	}	

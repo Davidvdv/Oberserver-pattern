@@ -1,35 +1,50 @@
 package schoolTrip;
 
-public class Parent implements IParent {
+public class Parent implements IObserver {
 
 	private int startTime;
-	private String agenda;
+	private Agenda agenda;
 	private String name;
+	
+	public static enum Agenda {
+		Smartphone,
+		Planboard,
+		Agendaboekje
+	}
 
-	public Parent(ITeacher t, String name, String agenda) {
+	public Parent(ISubject t, String name, Agenda agenda) {
 		
 		this.name = name;
 		this.agenda = agenda;
-		t.subscribeParent(this);		
+		t.subscribeObserver(this);		
 		
 		System.out.println("--- Nieuw ouder: " +this.name);
 
 	}
 	
-	public void register(ITeacher t) {
-		t.subscribeParent(this);
+	public void register(ISubject t) {
+		t.subscribeObserver(this);
 	}
 	
-	public void unregister(ITeacher t) {
-		t.unsubscribeParent(this);
+	public void unregister(ISubject t) {
+		t.unsubscribeObserver(this);
 	}
 
 	public void updateTime(int t) {
 		
 		this.startTime = t;
 		
-		System.out.println("--- "+this.name+" noteert "+ this.startTime + " in "+ this.agenda);
+		if(Parent.Agenda.Smartphone.equals(this.agenda)) {
+			System.out.println("--- "+this.name+" noteert "+ this.startTime + " voert het in de "+ this.agenda);
+		}
 		
+		if(Parent.Agenda.Planboard.equals(this.agenda)) {
+			System.out.println("--- "+this.name+" noteert "+ this.startTime + " schrijft het op met een krijtje op het "+ this.agenda);
+		}
+		
+		if(Parent.Agenda.Agendaboekje.equals(this.agenda)) {
+			System.out.println("--- "+this.name+" noteert "+ this.startTime + " schrijft het in het "+ this.agenda);
+		}
 	}
 	
 }

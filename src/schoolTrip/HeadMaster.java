@@ -2,14 +2,14 @@ package schoolTrip;
 
 import java.util.ArrayList;
 
-public class HeadMaster implements IHeadMaster {
+public class HeadMaster implements ISubject {
 
-	private ArrayList<ITeacher> teachers;
+	private ArrayList<IObserver> teachers;
 	private int startTime;
 
 	@SuppressWarnings("unused")
 	public HeadMaster() {
-		teachers = new ArrayList<ITeacher>();
+		teachers = new ArrayList<IObserver>();
 		
 		System.out.println("Nieuw schoolhoofd.");
 		System.out.println("--- --- --- --- ---");		
@@ -40,25 +40,25 @@ public class HeadMaster implements IHeadMaster {
 		
 	}
 
-	public void subscribeTeacher(ITeacher t) {
+	public void subscribeObserver(IObserver t) {
 		teachers.add(t);
 	}
 
-	public void unsubscribeTeacher(ITeacher t) {
+	public void unsubscribeObserver(IObserver t) {
 		if(teachers.contains(t)) {
 			teachers.remove(t);
 		}
 	}
 
-	public void notifyTeachers() {
-		for(ITeacher teacher : teachers) {
+	public void notifyObservers() {
+		for(IObserver teacher : teachers) {
 			teacher.updateTime(this.startTime);
 		}
 	}
 
 	public void updateTimee(int t) {
 		this.startTime = t;
-		notifyTeachers();
+		notifyObservers();
 	}
 	
 }
